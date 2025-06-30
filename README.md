@@ -2,7 +2,7 @@
 
 An AI-powered search engine with a generative UI.
 
-![capture](/public/screenshot-2025-01-31.png)
+![capture](/public/screenshot-2025-05-04.png)
 
 ## 🗂️ Overview
 
@@ -11,10 +11,11 @@ An AI-powered search engine with a generative UI.
 - 🚀 [Quickstart](#-quickstart)
 - 🌐 [Deploy](#-deploy)
 - 🔎 [Search Engine](#-search-engine)
-- ✅ [Verified models](#-verified-models)
-- ⚡ [AI SDK Implementation](#-ai-sdk-implementation)
-- 📦 [Open Source vs Cloud Offering](#-open-source-vs-cloud-offering)
+- 💙 [Sponsors](#-sponsors)
 - 👥 [Contributing](#-contributing)
+- 📄 [License](#-license)
+
+📝 Explore AI-generated documentation on [DeepWiki](https://deepwiki.com/miurla/morphic)
 
 ## 🛠 Features
 
@@ -25,6 +26,12 @@ An AI-powered search engine with a generative UI.
 - Multiple search providers support (Tavily, SearXNG, Exa)
 - Model selection from UI (switch between available AI models)
   - Reasoning models with visible thought process
+
+### Authentication
+
+- User authentication powered by [Supabase Auth](https://supabase.com/docs/guides/auth)
+- Supports Email/Password sign-up and sign-in
+- Supports Social Login with Google
 
 ### Chat & History
 
@@ -47,7 +54,7 @@ The following AI providers are supported:
 - xAI (Grok)
 - OpenAI Compatible
 
-Models are configured in `lib/config/models.json`. Each model requires its corresponding API key to be set in the environment variables. See [Configuration Guide](docs/CONFIGURATION.md) for details.
+Models are configured in `public/config/models.json`. Each model requires its corresponding API key to be set in the environment variables. See [Configuration Guide](docs/CONFIGURATION.md) for details.
 
 ### Search Capabilities
 
@@ -72,6 +79,10 @@ Models are configured in `lib/config/models.json`. Each model requires its corre
 - [Next.js](https://nextjs.org/) - App Router, React Server Components
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Vercel AI SDK](https://sdk.vercel.ai/docs) - Text streaming / Generative UI
+
+### Authentication & Authorization (Updated Category)
+
+- [Supabase](https://supabase.com/) - User authentication and backend services
 
 ### AI & Search
 
@@ -119,7 +130,7 @@ cp .env.local.example .env.local
 Fill in the required environment variables in `.env.local`:
 
 ```bash
-# Required
+# Required for Core Functionality
 OPENAI_API_KEY=     # Get from https://platform.openai.com/api-keys
 TAVILY_API_KEY=     # Get from https://app.tavily.com/home
 ```
@@ -150,6 +161,29 @@ Host your own live version of Morphic with Vercel, Cloudflare Pages, or Docker.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmiurla%2Fmorphic&env=OPENAI_API_KEY,TAVILY_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
+### Docker Prebuilt Image
+
+Prebuilt Docker images are available on GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/miurla/morphic:latest
+```
+
+You can use it with docker-compose:
+
+```yaml
+services:
+  morphic:
+    image: ghcr.io/miurla/morphic:latest
+    env_file: .env.local
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./models.json:/app/public/config/models.json # Optional: Override default model configuration
+```
+
+The default model configuration is located at `public/config/models.json`. For Docker deployment, you can create `models.json` alongside `.env.local` to override the default configuration.
+
 ## 🔎 Search Engine
 
 ### Setting up the Search Engine in Your Browser
@@ -169,56 +203,13 @@ If you want to use Morphic as a search engine in your browser, follow these step
 
 This will allow you to use Morphic as your default search engine in the browser.
 
-## ✅ Verified models
+## 💙 Sponsors
 
-### List of models applicable to all
+This project is proudly supported by:
 
-- OpenAI
-  - o3-mini
-  - gpt-4o
-  - gpt-4o-mini
-  - gpt-4-turbo
-  - gpt-3.5-turbo
-- Google
-  - Gemini 2.0 Pro (Experimental)
-  - Gemini 2.0 Flash Thinking (Experimental)
-  - Gemini 2.0 Flash
-- Anthropic
-  - Claude 3.5 Sonnet
-  - Claude 3.5 Hike
-- Ollama
-  - qwen2.5
-  - deepseek-r1
-- Groq
-  - deepseek-r1-distill-llama-70b
-- DeepSeek
-  - DeepSeek V3
-  - DeepSeek R1
-- xAI
-  - grok-2
-  - grok-2-vision
-
-## ⚡ AI SDK Implementation
-
-### Current Version: AI SDK UI
-
-This version of Morphic uses the AI SDK UI implementation, which is recommended for production use. It provides better streaming performance and more reliable client-side UI updates.
-
-### Previous Version: AI SDK RSC (v0.2.34 and earlier)
-
-The React Server Components (RSC) implementation of AI SDK was used in versions up to [v0.2.34](https://github.com/miurla/morphic/releases/tag/v0.2.34) but is now considered experimental and not recommended for production. If you need to reference the RSC implementation, please check the v0.2.34 release tag.
-
-> Note: v0.2.34 was the final version using RSC implementation before migrating to AI SDK UI.
-
-For more information about choosing between AI SDK UI and RSC, see the [official documentation](https://sdk.vercel.ai/docs/getting-started/navigating-the-library#when-to-use-ai-sdk-rsc).
-
-## 📦 Open Source vs Cloud Offering
-
-Morphic is open source software available under the Apache-2.0 license.
-
-To maintain sustainable development and provide cloud-ready features, we offer a hosted version of Morphic alongside our open-source offering. The cloud solution makes Morphic accessible to non-technical users and provides additional features while keeping the core functionality open and available for developers.
-
-For our cloud service, visit [morphic.sh](https://morphic.sh).
+<a href="https://vercel.com/oss">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge.svg" />
+</a>
 
 ## 👥 Contributing
 
@@ -230,3 +221,7 @@ Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
 - How to submit pull requests
 - Commit message conventions
 - Development setup
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.

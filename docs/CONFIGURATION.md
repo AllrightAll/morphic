@@ -121,7 +121,7 @@ docker-compose logs searxng
 
 ## Additional AI Providers
 
-Models are configured in `lib/config/models.json`. Each model requires its corresponding API key to be set in the environment variables.
+Models are configured in `public/config/models.json`. Each model requires its corresponding API key to be set in the environment variables.
 
 ### Model Configuration
 
@@ -137,7 +137,7 @@ The `models.json` file contains an array of model configurations with the follow
       "providerId": "provider-id",
       "enabled": true,
       "toolCallType": "native|manual",
-      "toolCallModel": "tool-call-model-id" // only required if toolCallType is "manual"
+      "toolCallModel": "tool-call-model-id" // optional, only needed if toolCallType is "manual" and you need to specify a different model for tool calls
     }
   ]
 }
